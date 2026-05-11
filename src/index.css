@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #17231f;
+  background: #f8f5ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #d6a95b;
+  color: #17231f;
+}
+
+@layer components {
+  .placeholder-visual {
+    @apply relative flex h-full min-h-[14rem] w-full items-end overflow-hidden bg-gradient-to-br from-moss via-ink to-plum p-5 text-pearl;
+  }
+
+  .placeholder-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 32px),
+      linear-gradient(45deg, rgba(214, 169, 91, 0.22) 0 1px, transparent 1px 44px);
+    opacity: 0.72;
+  }
+
+  .placeholder-visual span {
+    @apply relative z-10 rounded-md border border-white/20 bg-ink/50 px-3 py-2 text-sm font-semibold backdrop-blur;
+  }
+
+  .form-field {
+    @apply grid gap-2 text-sm font-semibold text-ink;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    @apply w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal text-ink outline-none transition placeholder:text-ink/35 focus:border-copper focus:ring-4 focus:ring-copper/15;
+  }
+
+  .map-panel {
+    background-image: linear-gradient(135deg, rgba(134, 165, 138, 0.3), rgba(239, 228, 209, 0.95));
+  }
+}
