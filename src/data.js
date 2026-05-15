@@ -82,7 +82,9 @@ export const galleryItems = [
     label: 'Handmade pastas',
   },
   {
-    alt: 'Chef table placeholder for future gallery image',
+    image:
+      'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&q=80&w=1200',
+    alt: 'Kitchen table prepared for a chef-led dining moment',
     label: 'Chef table moments',
   },
 ]

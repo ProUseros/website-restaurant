@@ -38,7 +38,7 @@ The production build is generated in `dist`.
 
 The reservation form sends requests to `shanehealy2005@gmail.com` through FormSubmit.
 
-The first test submission may send a confirmation email. Confirm it once, then future reservation requests will be delivered to the inbox.
+The first test submission may send a confirmation email. Confirm it once, then future reservation requests will be delivered to the inbox. The form uses a standard browser POST so it does not depend on client-side `fetch`.
 
 ## Cloudflare Pages
 
