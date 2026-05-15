@@ -1,16 +1,14 @@
-import {
-  ArrowRight,
-  CalendarCheck,
-  Clock3,
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Star,
-  Utensils,
-} from 'lucide-react'
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js'
+import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
+import Clock3 from 'lucide-react/dist/esm/icons/clock-3.js'
+import Facebook from 'lucide-react/dist/esm/icons/facebook.js'
+import Instagram from 'lucide-react/dist/esm/icons/instagram.js'
+import Mail from 'lucide-react/dist/esm/icons/mail.js'
+import MapPin from 'lucide-react/dist/esm/icons/map-pin.js'
+import Phone from 'lucide-react/dist/esm/icons/phone.js'
+import Send from 'lucide-react/dist/esm/icons/send.js'
+import Star from 'lucide-react/dist/esm/icons/star.js'
+import Utensils from 'lucide-react/dist/esm/icons/utensils.js'
 import { useState } from 'react'
 import Navbar from './components/Navbar'
 import SectionHeading from './components/SectionHeading'

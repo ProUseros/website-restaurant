@@ -33,18 +33,24 @@ export const featuredMenu = [
     name: 'Charred Cauliflower Steak',
     description: 'Golden cauliflower with smoked almond romesco and pickled shallots.',
     price: '$21',
+    image:
+      'https://images.unsplash.com/photo-1714383611436-7272fa987320?auto=format&fit=crop&q=80&w=1200',
     alt: 'Charred cauliflower steak with romesco',
   },
   {
     name: 'Lavender Honey Latte',
     description: 'Velvety espresso, steamed milk, lavender syrup, and local honey.',
     price: '$7',
+    image:
+      'https://images.unsplash.com/photo-1475759697283-38cc56e4455a?auto=format&fit=crop&q=80&w=1200',
     alt: 'Lavender honey latte in a ceramic cup',
   },
   {
     name: 'Pistachio Rose Tart',
     description: 'Buttery tart shell with pistachio cream, rose petals, and citrus zest.',
     price: '$12',
+    image:
+      'https://images.unsplash.com/photo-1749280446160-466f6d121d49?auto=format&fit=crop&q=80&w=1200',
     alt: 'Pistachio rose tart dessert',
   },
 ]
