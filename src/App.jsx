@@ -9,13 +9,15 @@ import Phone from 'lucide-react/dist/esm/icons/phone.js'
 import Send from 'lucide-react/dist/esm/icons/send.js'
 import Star from 'lucide-react/dist/esm/icons/star.js'
 import Utensils from 'lucide-react/dist/esm/icons/utensils.js'
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import SectionHeading from './components/SectionHeading'
 import SmartImage from './components/SmartImage'
 import { featuredMenu, galleryItems, navLinks, openingHours, reviews } from './data'
 
+const WEB3FORMS_ACCESS_KEY = 'a4615f98-73fb-43c2-9dba-20ba6e8c57cf'
 const RESERVATION_EMAIL = 'shanehealy2005@gmail.com'
-const RESERVATION_ENDPOINT = `https://formsubmit.co/${RESERVATION_EMAIL}`
+const RESERVATION_ENDPOINT = 'https://api.web3forms.com/submit'
 
 function MenuCard({ item, index }) {
   return (
@@ -60,12 +62,50 @@ function PlaceholderMap() {
 }
 
 function ReservationForm() {
+  const [status, setStatus] = useState('idle')
+  const [statusMessage, setStatusMessage] = useState('')
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    formData.append('access_key', WEB3FORMS_ACCESS_KEY)
+    formData.append('subject', 'New Luna Bistro reservation request')
+    formData.append('from_name', 'Luna Bistro Website')
+
+    setStatus('sending')
+    setStatusMessage('')
+
+    try {
+      const response = await fetch(RESERVATION_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+      })
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unable to send the reservation request.')
+      }
+
+      form.reset()
+      setStatus('sent')
+      setStatusMessage(`Thank you. Your reservation request has been emailed to ${RESERVATION_EMAIL}.`)
+    } catch (error) {
+      setStatus('error')
+      setStatusMessage(error.message || 'Something went wrong. Please try again.')
+    }
+  }
+
+  const isSending = status === 'sending'
+  const statusTone =
+    status === 'error'
+      ? 'border-copper/30 bg-copper/10 text-copper'
+      : 'border-moss/25 bg-moss/10 text-moss'
+
   return (
-    <form className="grid gap-5" action={RESERVATION_ENDPOINT} method="POST">
-      <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
-      <input type="hidden" name="_subject" value="New Luna Bistro reservation request" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
+    <form className="grid gap-5" onSubmit={handleSubmit}>
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="form-field">
           <span>Name</span>
@@ -92,11 +132,15 @@ function ReservationForm() {
       </label>
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-copper px-6 py-4 text-sm font-bold text-white transition hover:bg-ink sm:w-auto"
+        disabled={isSending}
+        className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-copper px-6 py-4 text-sm font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         <Send size={18} aria-hidden="true" />
-        Send Reservation Request
+        {isSending ? 'Sending Request...' : 'Send Reservation Request'}
       </button>
+      {statusMessage ? (
+        <p className={`rounded-md border px-4 py-3 text-sm font-medium ${statusTone}`}>{statusMessage}</p>
+      ) : null}
     </form>
   )
 }
