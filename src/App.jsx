@@ -15,6 +15,9 @@ import SectionHeading from './components/SectionHeading'
 import SmartImage from './components/SmartImage'
 import { featuredMenu, galleryItems, navLinks, openingHours, reviews } from './data'
 
+const RESERVATION_EMAIL = 'shanehealy2005@gmail.com'
+const RESERVATION_ENDPOINT = `https://formsubmit.co/ajax/${RESERVATION_EMAIL}`
+
 function MenuCard({ item, index }) {
   return (
     <article className="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lift">
@@ -58,15 +61,56 @@ function PlaceholderMap() {
 }
 
 function ReservationForm() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle')
+  const [statusMessage, setStatusMessage] = useState('')
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    setSent(true)
+    const form = event.currentTarget
+
+    const formData = new FormData(form)
+    const payload = Object.fromEntries(formData.entries())
+
+    setStatus('sending')
+    setStatusMessage('')
+
+    try {
+      const response = await fetch(RESERVATION_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...payload,
+          _subject: 'New Luna Bistro reservation request',
+          _template: 'table',
+        }),
+      })
+      const result = await response.json()
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'Unable to send the reservation request.')
+      }
+
+      form.reset()
+      setStatus('sent')
+      setStatusMessage(`Thank you. Your reservation request has been emailed to ${RESERVATION_EMAIL}.`)
+    } catch (error) {
+      setStatus('error')
+      setStatusMessage(error.message || 'Something went wrong. Please try again.')
+    }
   }
+
+  const isSending = status === 'sending'
+  const statusTone =
+    status === 'error'
+      ? 'border-copper/30 bg-copper/10 text-copper'
+      : 'border-moss/25 bg-moss/10 text-moss'
 
   return (
     <form className="grid gap-5" onSubmit={handleSubmit}>
+      <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="form-field">
           <span>Name</span>
@@ -93,15 +137,14 @@ function ReservationForm() {
       </label>
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-copper px-6 py-4 text-sm font-bold text-white transition hover:bg-ink sm:w-auto"
+        disabled={isSending}
+        className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-copper px-6 py-4 text-sm font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         <Send size={18} aria-hidden="true" />
-        Send Reservation Request
+        {isSending ? 'Sending Request...' : 'Send Reservation Request'}
       </button>
-      {sent ? (
-        <p className="rounded-md border border-moss/25 bg-moss/10 px-4 py-3 text-sm font-medium text-moss">
-          Thank you. Your reservation request has been received.
-        </p>
+      {statusMessage ? (
+        <p className={`rounded-md border px-4 py-3 text-sm font-medium ${statusTone}`}>{statusMessage}</p>
       ) : null}
     </form>
   )

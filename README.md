@@ -34,6 +34,12 @@ npm run build
 
 The production build is generated in `dist`.
 
+## Reservation Email Setup
+
+The reservation form sends requests to `shanehealy2005@gmail.com` through FormSubmit.
+
+The first test submission may send a confirmation email. Confirm it once, then future reservation requests will be delivered to the inbox.
+
 ## Cloudflare Pages
 
 Use these deployment settings:
