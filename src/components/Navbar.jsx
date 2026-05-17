@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
 import Menu from 'lucide-react/dist/esm/icons/menu.js'
 import X from 'lucide-react/dist/esm/icons/x.js'
@@ -6,24 +6,11 @@ import { navLinks } from '../data'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
 
   const closeMenu = () => setIsOpen(false)
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24)
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const navTone = isScrolled ? 'bg-linen/96 shadow-soft' : 'bg-linen'
-  const borderTone = isScrolled ? 'border-olive/10' : 'border-olive/8'
-
   return (
-    <header className={`sticky top-0 z-50 border-b ${borderTone} ${navTone} transition duration-300`}>
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-olive/10 bg-linen shadow-soft">
       <nav
         aria-label="Primary navigation"
         className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8"

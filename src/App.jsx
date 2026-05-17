@@ -120,42 +120,13 @@ function MenuCard({ item }) {
 function LocationMap() {
   return (
     <div className="overflow-hidden rounded-sm border border-olive/10 bg-linen shadow-soft">
-      <div className="flex items-center justify-between gap-4 border-b border-olive/10 px-4 py-3 sm:px-5">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-olive text-pearl">
-            <MapPin size={18} aria-hidden="true" />
-          </span>
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ink">{restaurantContact.name}</p>
-            <p className="truncate text-xs text-smoke">{restaurantContact.addressLines.join(', ')}</p>
-          </div>
-        </div>
-        <a
-          href={restaurantContact.mapUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden text-xs font-semibold text-olive underline decoration-tan underline-offset-4 transition hover:text-moss sm:inline"
-        >
-          Open map
-        </a>
-      </div>
-      <div className="relative bg-cream">
-        <iframe
-          title="OpenStreetMap location for Luna Bistro"
-          src={restaurantContact.mapEmbedUrl}
-          className="block h-[280px] w-full border-0 sm:h-[360px] lg:h-[420px]"
-          loading="eager"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-full place-items-center gap-2">
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-olive text-pearl shadow-lift ring-4 ring-linen/85">
-            <MapPin size={24} aria-hidden="true" />
-          </span>
-          <span className="rounded-sm border border-olive/10 bg-linen/95 px-3 py-1 text-xs font-semibold text-olive shadow-soft">
-            Luna Bistro
-          </span>
-        </div>
-      </div>
+      <iframe
+        title="OpenStreetMap location for Luna Bistro"
+        src={restaurantContact.mapEmbedUrl}
+        className="block h-[280px] w-full border-0 sm:h-[360px] lg:h-[420px]"
+        loading="eager"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
     </div>
   )
 }
@@ -246,7 +217,7 @@ function ReservationForm() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-pearl font-body text-ink">
+    <div className="min-h-screen bg-pearl pt-[77px] font-body text-ink sm:pt-[81px]">
       <Navbar />
 
       <main>
