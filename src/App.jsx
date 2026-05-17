@@ -20,6 +20,17 @@ import { featuredMenu, galleryItems, navLinks, openingHours, reviews } from './d
 const WEB3FORMS_ACCESS_KEY = 'a4615f98-73fb-43c2-9dba-20ba6e8c57cf'
 const RESERVATION_EMAIL = 'shanehealy2005@gmail.com'
 const RESERVATION_ENDPOINT = 'https://api.web3forms.com/submit'
+const restaurantContact = {
+  name: 'Luna Bistro',
+  addressLines: ['42 Lindenstraße', '10115 Berlin, Germany'],
+  phone: '+49 30 1234 0198',
+  email: 'hello@lunabistro.com',
+  mapEmbedUrl:
+    'https://www.openstreetmap.org/export/embed.html?bbox=13.3858%2C52.4986%2C13.4058%2C52.5106&layer=mapnik&marker=52.5046%2C13.3958',
+  mapUrl: 'https://www.openstreetmap.org/?mlat=52.5046&mlon=13.3958#map=16/52.5046/13.3958',
+  directionsUrl:
+    'https://www.google.com/maps/search/?api=1&query=Luna%20Bistro%2042%20Lindenstra%C3%9Fe%2010115%20Berlin%20Germany',
+}
 
 const heroStats = [
   {
@@ -106,21 +117,44 @@ function MenuCard({ item }) {
   )
 }
 
-function PlaceholderMap() {
+function LocationMap() {
   return (
-    <div className="map-panel relative min-h-[20rem] overflow-hidden rounded-sm border border-olive/10 bg-cream sm:min-h-[24rem]">
-      <div className="absolute left-[12%] top-0 h-full w-5 rotate-12 bg-linen/80" />
-      <div className="absolute left-[45%] top-0 h-full w-4 -rotate-6 bg-linen/70" />
-      <div className="absolute left-0 top-[28%] h-5 w-full rotate-3 bg-linen/75" />
-      <div className="absolute left-0 top-[62%] h-4 w-full -rotate-2 bg-linen/65" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(63,75,43,0.055)_1px,transparent_1px),linear-gradient(0deg,rgba(63,75,43,0.055)_1px,transparent_1px)] bg-[size:34px_34px]" />
-      <div className="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center gap-3 text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-full bg-olive text-pearl shadow-soft">
-          <MapPin size={30} aria-hidden="true" />
-        </span>
-        <span className="rounded-sm border border-olive/10 bg-linen/95 px-4 py-2 text-sm font-semibold text-olive shadow-soft">
-          Luna Bistro
-        </span>
+    <div className="overflow-hidden rounded-sm border border-olive/10 bg-linen shadow-soft">
+      <div className="flex items-center justify-between gap-4 border-b border-olive/10 px-4 py-3 sm:px-5">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-olive text-pearl">
+            <MapPin size={18} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold text-ink">{restaurantContact.name}</p>
+            <p className="truncate text-xs text-smoke">{restaurantContact.addressLines.join(', ')}</p>
+          </div>
+        </div>
+        <a
+          href={restaurantContact.mapUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="hidden text-xs font-semibold text-olive underline decoration-tan underline-offset-4 transition hover:text-moss sm:inline"
+        >
+          Open map
+        </a>
+      </div>
+      <div className="relative bg-cream">
+        <iframe
+          title="OpenStreetMap location for Luna Bistro"
+          src={restaurantContact.mapEmbedUrl}
+          className="block h-[280px] w-full border-0 sm:h-[360px] lg:h-[420px]"
+          loading="eager"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-full place-items-center gap-2">
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-olive text-pearl shadow-lift ring-4 ring-linen/85">
+            <MapPin size={24} aria-hidden="true" />
+          </span>
+          <span className="rounded-sm border border-olive/10 bg-linen/95 px-3 py-1 text-xs font-semibold text-olive shadow-soft">
+            Luna Bistro
+          </span>
+        </div>
       </div>
     </div>
   )
@@ -383,25 +417,45 @@ export default function App() {
           <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
               <SectionHeading eyebrow="Location" title="Find us where the city slows down.">
-                Tucked into a calm corner of the old district, Luna Bistro is easy to reach for breakfast
-                meetings, weekend brunch, and intimate evening reservations.
+                A polished demo location in central Berlin, designed to show clients how a finished
+                restaurant website can present directions with clarity and trust.
               </SectionHeading>
               <div className="mt-8 space-y-5 text-smoke">
-                <p className="flex gap-3">
+                <div className="flex gap-3">
                   <MapPin className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
-                  128 Crescent Lane, Old Town District, New York, NY 10012
-                </p>
+                  <p>
+                    <span className="block font-semibold text-ink">{restaurantContact.name}</span>
+                    {restaurantContact.addressLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                </div>
                 <p className="flex gap-3">
                   <Phone className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
-                  (555) 014-7820
+                  <a href={`tel:${restaurantContact.phone.replace(/\s/g, '')}`} className="transition hover:text-olive">
+                    {restaurantContact.phone}
+                  </a>
                 </p>
                 <p className="flex gap-3">
                   <Mail className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
-                  reservations@lunabistro.example
+                  <a href={`mailto:${restaurantContact.email}`} className="transition hover:text-olive">
+                    {restaurantContact.email}
+                  </a>
                 </p>
               </div>
+              <a
+                href={restaurantContact.directionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-sm bg-olive px-5 py-3 text-sm font-semibold text-pearl transition hover:bg-moss sm:w-auto"
+              >
+                <MapPin size={18} aria-hidden="true" />
+                Get directions
+              </a>
             </div>
-            <PlaceholderMap />
+            <LocationMap />
           </div>
         </section>
 
@@ -482,9 +536,10 @@ export default function App() {
           <div>
             <p className="font-semibold text-tan">Contact</p>
             <div className="mt-4 space-y-3 text-sm text-pearl/72">
-              <p>128 Crescent Lane</p>
-              <p>(555) 014-7820</p>
-              <p>reservations@lunabistro.example</p>
+              <p>{restaurantContact.addressLines[0]}</p>
+              <p>{restaurantContact.addressLines[1]}</p>
+              <p>{restaurantContact.phone}</p>
+              <p>{restaurantContact.email}</p>
             </div>
           </div>
         </div>
