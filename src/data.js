@@ -33,24 +33,21 @@ export const featuredMenu = [
     name: 'Charred Cauliflower Steak',
     description: 'Golden cauliflower with smoked almond romesco and pickled shallots.',
     price: '$21',
-    image:
-      'https://images.unsplash.com/photo-1714383611436-7272fa987320?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/cauliflower-steak.jpg',
     alt: 'Charred cauliflower steak with romesco',
   },
   {
     name: 'Lavender Honey Latte',
     description: 'Velvety espresso, steamed milk, lavender syrup, and local honey.',
     price: '$7',
-    image:
-      'https://images.unsplash.com/photo-1475759697283-38cc56e4455a?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/lavender-latte.jpg',
     alt: 'Lavender honey latte in a ceramic cup',
   },
   {
     name: 'Pistachio Rose Tart',
     description: 'Buttery tart shell with pistachio cream, rose petals, and citrus zest.',
     price: '$12',
-    image:
-      'https://images.unsplash.com/photo-1749280446160-466f6d121d49?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/pistachio-tart.jpg',
     alt: 'Pistachio rose tart dessert',
   },
 ]
@@ -82,8 +79,7 @@ export const galleryItems = [
     label: 'Handmade pastas',
   },
   {
-    image:
-      'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&q=80&w=1200',
+    image: '/images/chef-table.jpg',
     alt: 'Kitchen table prepared for a chef-led dining moment',
     label: 'Chef table moments',
   },

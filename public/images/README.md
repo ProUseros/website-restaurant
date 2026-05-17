@@ -7,6 +7,10 @@ Current project images are local assets copied from the repository's original `i
 - `dish-1.avif`
 - `dish-2.avif`
 - `dish-3.avif`
+- `cauliflower-steak.jpg`
+- `lavender-latte.jpg`
+- `pistachio-tart.jpg`
+- `chef-table.jpg`
 
 Suggested future replacement filenames:
 

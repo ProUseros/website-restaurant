@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  color: #17231f;
-  background: #f8f5ef;
+  color: #252820;
+  background: #fbf8f1;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,13 +28,13 @@ textarea {
 }
 
 ::selection {
-  background: #d6a95b;
-  color: #17231f;
+  background: #c6a66c;
+  color: #252820;
 }
 
 @layer components {
   .placeholder-visual {
-    @apply relative flex h-full min-h-[14rem] w-full items-end overflow-hidden bg-gradient-to-br from-moss via-ink to-plum p-5 text-pearl;
+    @apply relative flex h-full min-h-[14rem] w-full items-end overflow-hidden bg-cream p-5 text-olive;
   }
 
   .placeholder-visual::before {
@@ -42,13 +42,13 @@ textarea {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 32px),
-      linear-gradient(45deg, rgba(214, 169, 91, 0.22) 0 1px, transparent 1px 44px);
-    opacity: 0.72;
+      linear-gradient(135deg, rgba(63, 75, 43, 0.08) 0 1px, transparent 1px 32px),
+      linear-gradient(45deg, rgba(198, 166, 108, 0.18) 0 1px, transparent 1px 44px);
+    opacity: 0.68;
   }
 
   .placeholder-visual span {
-    @apply relative z-10 rounded-md border border-white/20 bg-ink/50 px-3 py-2 text-sm font-semibold backdrop-blur;
+    @apply relative z-10 rounded-md border border-olive/15 bg-pearl/80 px-3 py-2 text-sm font-semibold backdrop-blur;
   }
 
   .form-field {
@@ -57,10 +57,10 @@ textarea {
 
   .form-field input,
   .form-field textarea {
-    @apply w-full rounded-md border border-ink/15 bg-white px-4 py-3 text-base font-normal text-ink outline-none transition placeholder:text-ink/35 focus:border-copper focus:ring-4 focus:ring-copper/15;
+    @apply w-full rounded-md border border-olive/15 bg-linen px-4 py-3 text-base font-normal text-ink outline-none transition placeholder:text-smoke/55 focus:border-olive focus:ring-4 focus:ring-olive/10;
   }
 
   .map-panel {
-    background-image: linear-gradient(135deg, rgba(134, 165, 138, 0.3), rgba(239, 228, 209, 0.95));
+    background-image: linear-gradient(135deg, rgba(251, 248, 241, 0.95), rgba(233, 223, 207, 0.9));
   }
 }

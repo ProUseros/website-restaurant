@@ -4,27 +4,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#17231f',
-        moss: '#2f5b45',
-        sage: '#86a58a',
-        pearl: '#f8f5ef',
-        shell: '#efe4d1',
-        copper: '#b96f43',
-        plum: '#65384d',
-        rose: '#d9a8a0',
-        gold: '#d6a95b',
+        ink: '#252820',
+        olive: '#3f4b2b',
+        moss: '#53603b',
+        sage: '#8d9877',
+        pearl: '#fbf8f1',
+        cream: '#f4efe5',
+        shell: '#e9dfcf',
+        linen: '#fffdf8',
+        tan: '#c6a66c',
+        clay: '#a96f4c',
+        smoke: '#6f7168',
+        gold: '#c6a66c',
       },
       fontFamily: {
         display: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
         body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 22px 70px rgba(23, 35, 31, 0.16)',
-        lift: '0 18px 42px rgba(23, 35, 31, 0.18)',
+        soft: '0 18px 50px rgba(63, 75, 43, 0.08)',
+        lift: '0 20px 60px rgba(63, 75, 43, 0.12)',
       },
       backgroundImage: {
         'linen-texture':
-          'linear-gradient(135deg, rgba(248,245,239,1), rgba(239,228,209,0.78) 48%, rgba(248,245,239,1))',
+          'linear-gradient(135deg, rgba(251,248,241,1), rgba(244,239,229,0.84) 48%, rgba(255,253,248,1))',
       },
     },
   },

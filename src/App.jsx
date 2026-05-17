@@ -1,8 +1,10 @@
 import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right.js'
 import CalendarCheck from 'lucide-react/dist/esm/icons/calendar-check.js'
 import Clock3 from 'lucide-react/dist/esm/icons/clock-3.js'
+import Coffee from 'lucide-react/dist/esm/icons/coffee.js'
 import Facebook from 'lucide-react/dist/esm/icons/facebook.js'
 import Instagram from 'lucide-react/dist/esm/icons/instagram.js'
+import Leaf from 'lucide-react/dist/esm/icons/leaf.js'
 import Mail from 'lucide-react/dist/esm/icons/mail.js'
 import MapPin from 'lucide-react/dist/esm/icons/map-pin.js'
 import Phone from 'lucide-react/dist/esm/icons/phone.js'
@@ -19,23 +21,86 @@ const WEB3FORMS_ACCESS_KEY = 'a4615f98-73fb-43c2-9dba-20ba6e8c57cf'
 const RESERVATION_EMAIL = 'shanehealy2005@gmail.com'
 const RESERVATION_ENDPOINT = 'https://api.web3forms.com/submit'
 
-function MenuCard({ item, index }) {
+const heroStats = [
+  {
+    icon: Clock3,
+    value: '07:30',
+    label: 'Morning service starts',
+  },
+  {
+    icon: Utensils,
+    value: '6 courses',
+    label: 'Rotating dinner tasting',
+  },
+  {
+    icon: Leaf,
+    value: 'Local',
+    label: 'Farmers and roasters',
+  },
+]
+
+function ButtonLink({ href, children, variant = 'primary' }) {
+  const styles =
+    variant === 'primary'
+      ? 'bg-olive text-pearl hover:bg-moss'
+      : 'border border-olive/35 bg-linen text-olive hover:border-olive hover:bg-cream'
+
   return (
-    <article className="group overflow-hidden rounded-lg border border-ink/10 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lift">
-      <div className="aspect-[4/3] overflow-hidden bg-ink">
+    <a
+      href={href}
+      className={`inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-sm px-5 py-3 text-sm font-semibold transition sm:w-auto ${styles}`}
+    >
+      {children}
+    </a>
+  )
+}
+
+function HeroInfoStrip() {
+  return (
+    <div className="border-y border-olive/10 bg-linen">
+      <div className="mx-auto grid max-w-7xl gap-0 px-4 py-5 sm:px-6 md:grid-cols-3 lg:px-8">
+        {heroStats.map((item, index) => {
+          const Icon = item.icon
+
+          return (
+            <div
+              key={item.value}
+              className={`flex items-center gap-4 py-4 md:px-8 md:py-6 ${
+                index === 0 ? 'md:pl-0' : 'border-t border-olive/10 md:border-l md:border-t-0'
+              }`}
+            >
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-olive/25 text-olive">
+                <Icon size={22} aria-hidden="true" />
+              </span>
+              <span>
+                <strong className="block text-lg text-olive">{item.value}</strong>
+                <span className="text-sm text-smoke">{item.label}</span>
+              </span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function MenuCard({ item }) {
+  return (
+    <article className="group overflow-hidden rounded-sm border border-olive/10 bg-linen transition duration-300 hover:border-olive/20 hover:shadow-soft">
+      <div className="aspect-[4/3] overflow-hidden bg-cream">
         <SmartImage
           src={item.image}
           alt={item.alt}
-          label={`Signature ${index + 1}`}
-          className="transition duration-500 group-hover:scale-105"
+          label={item.name}
+          className="transition duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-5">
+      <div className="p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-4">
           <h3 className="font-display text-2xl leading-tight text-ink">{item.name}</h3>
-          <p className="shrink-0 text-lg font-bold text-copper">{item.price}</p>
+          <p className="shrink-0 text-base font-semibold text-olive">{item.price}</p>
         </div>
-        <p className="mt-4 text-sm leading-7 text-ink/68">{item.description}</p>
+        <p className="mt-3 text-sm leading-7 text-smoke">{item.description}</p>
       </div>
     </article>
   )
@@ -43,17 +108,17 @@ function MenuCard({ item, index }) {
 
 function PlaceholderMap() {
   return (
-    <div className="map-panel relative min-h-[22rem] overflow-hidden rounded-lg border border-ink/10 bg-shell shadow-soft">
-      <div className="absolute left-[12%] top-0 h-full w-5 rotate-12 bg-white/75" />
-      <div className="absolute left-[45%] top-0 h-full w-4 -rotate-6 bg-white/65" />
-      <div className="absolute left-0 top-[28%] h-5 w-full rotate-3 bg-white/70" />
-      <div className="absolute left-0 top-[62%] h-4 w-full -rotate-2 bg-white/60" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(23,35,31,0.06)_1px,transparent_1px),linear-gradient(0deg,rgba(23,35,31,0.06)_1px,transparent_1px)] bg-[size:34px_34px]" />
+    <div className="map-panel relative min-h-[20rem] overflow-hidden rounded-sm border border-olive/10 bg-cream sm:min-h-[24rem]">
+      <div className="absolute left-[12%] top-0 h-full w-5 rotate-12 bg-linen/80" />
+      <div className="absolute left-[45%] top-0 h-full w-4 -rotate-6 bg-linen/70" />
+      <div className="absolute left-0 top-[28%] h-5 w-full rotate-3 bg-linen/75" />
+      <div className="absolute left-0 top-[62%] h-4 w-full -rotate-2 bg-linen/65" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(63,75,43,0.055)_1px,transparent_1px),linear-gradient(0deg,rgba(63,75,43,0.055)_1px,transparent_1px)] bg-[size:34px_34px]" />
       <div className="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center gap-3 text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-lg bg-ink text-gold shadow-lift">
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-olive text-pearl shadow-soft">
           <MapPin size={30} aria-hidden="true" />
         </span>
-        <span className="rounded-md bg-pearl/95 px-4 py-2 text-sm font-semibold text-ink shadow-soft">
+        <span className="rounded-sm border border-olive/10 bg-linen/95 px-4 py-2 text-sm font-semibold text-olive shadow-soft">
           Luna Bistro
         </span>
       </div>
@@ -100,13 +165,13 @@ function ReservationForm() {
   const isSending = status === 'sending'
   const statusTone =
     status === 'error'
-      ? 'border-copper/30 bg-copper/10 text-copper'
-      : 'border-moss/25 bg-moss/10 text-moss'
+      ? 'border-clay/25 bg-clay/10 text-clay'
+      : 'border-olive/20 bg-olive/8 text-olive'
 
   return (
-    <form className="grid gap-5" onSubmit={handleSubmit}>
+    <form className="grid gap-4 sm:gap-5" onSubmit={handleSubmit}>
       <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <label className="form-field">
           <span>Name</span>
           <input type="text" name="name" placeholder="Your name" required />
@@ -116,7 +181,7 @@ function ReservationForm() {
           <input type="email" name="email" placeholder="you@example.com" required />
         </label>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
         <label className="form-field">
           <span>Date</span>
           <input type="date" name="date" required />
@@ -133,13 +198,13 @@ function ReservationForm() {
       <button
         type="submit"
         disabled={isSending}
-        className="inline-flex w-full items-center justify-center gap-3 rounded-md bg-copper px-6 py-4 text-sm font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-sm bg-olive px-5 py-3 text-sm font-semibold text-pearl transition hover:bg-moss disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:px-6"
       >
         <Send size={18} aria-hidden="true" />
         {isSending ? 'Sending Request...' : 'Send Reservation Request'}
       </button>
       {statusMessage ? (
-        <p className={`rounded-md border px-4 py-3 text-sm font-medium ${statusTone}`}>{statusMessage}</p>
+        <p className={`rounded-sm border px-4 py-3 text-sm font-medium leading-6 ${statusTone}`}>{statusMessage}</p>
       ) : null}
     </form>
   )
@@ -151,75 +216,73 @@ export default function App() {
       <Navbar />
 
       <main>
-        <section id="home" className="relative isolate min-h-[92vh] overflow-hidden bg-ink">
-          <SmartImage
-            src="/images/hero-restaurant.avif"
-            alt="Coffee and brunch table setting at Luna Bistro"
-            priority
-            className="absolute inset-0 -z-20"
-          />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-ink/92 via-ink/68 to-moss/55" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-pearl to-transparent" />
-
-          <div className="mx-auto flex min-h-[92vh] max-w-7xl items-center px-4 pb-20 pt-32 sm:px-6 lg:px-8">
-            <div className="max-w-4xl text-pearl">
-              <p className="mb-5 inline-flex rounded-md border border-gold/40 bg-ink/45 px-4 py-2 text-sm font-semibold text-gold backdrop-blur">
+        <section id="home" className="bg-pearl">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-2 lg:gap-14 lg:px-8 lg:py-12">
+            <div className="order-1 max-w-2xl lg:order-none">
+              <p className="text-xs font-semibold uppercase leading-6 tracking-[0.28em] text-olive/82">
                 Seasonal dining, specialty coffee, and moonlit suppers
               </p>
-              <h1 className="font-display text-5xl leading-[1.04] sm:text-6xl lg:text-7xl">
-                Luna Bistro brings cafe warmth to a polished evening table.
+              <div className="mt-8 h-px w-16 bg-tan" aria-hidden="true" />
+              <h1 className="mt-8 font-display text-5xl leading-[1.04] text-ink sm:text-6xl xl:text-7xl">
+                Warm plates.
+                <br />
+                Polished evenings.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-pearl/82 sm:text-xl">
+              <p className="mt-6 max-w-xl text-base leading-8 text-smoke sm:text-lg">
                 Slow mornings, expressive plates, intimate interiors, and the kind of quiet hospitality
                 that makes guests stay longer.
               </p>
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <a
-                  href="#menu"
-                  className="inline-flex items-center justify-center gap-3 rounded-md bg-gold px-6 py-4 text-sm font-bold text-ink transition hover:bg-pearl"
-                >
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="#menu">
                   <Utensils size={18} aria-hidden="true" />
                   View Menu
-                </a>
-                <a
-                  href="#reservation"
-                  className="inline-flex items-center justify-center gap-3 rounded-md border border-pearl/55 bg-pearl/10 px-6 py-4 text-sm font-bold text-pearl backdrop-blur transition hover:bg-pearl hover:text-ink"
-                >
+                </ButtonLink>
+                <ButtonLink href="#reservation" variant="secondary">
                   <CalendarCheck size={18} aria-hidden="true" />
                   Book a Table
-                </a>
+                </ButtonLink>
               </div>
-              <div className="mt-12 grid max-w-3xl gap-4 text-sm text-pearl/78 sm:grid-cols-3">
-                <div className="border-l border-gold/55 pl-4">
-                  <strong className="block text-xl text-pearl">07:30</strong>
-                  Morning service starts
-                </div>
-                <div className="border-l border-gold/55 pl-4">
-                  <strong className="block text-xl text-pearl">6 courses</strong>
-                  Rotating dinner tasting
-                </div>
-                <div className="border-l border-gold/55 pl-4">
-                  <strong className="block text-xl text-pearl">Local</strong>
-                  Farmers and roasters
-                </div>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-smoke">
+                <span className="inline-flex items-center gap-2">
+                  <Clock3 size={16} className="text-olive" aria-hidden="true" />
+                  Open daily
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Leaf size={16} className="text-olive" aria-hidden="true" />
+                  Seasonal menu
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Coffee size={16} className="text-olive" aria-hidden="true" />
+                  Cafe & supper club
+                </span>
               </div>
             </div>
+
+            <div className="order-2 overflow-hidden rounded-sm border border-olive/10 bg-cream shadow-soft lg:h-[34rem] xl:h-[36rem]">
+              <SmartImage
+                src="/images/hero-restaurant.avif"
+                alt="Coffee and brunch table setting at Luna Bistro"
+                priority
+                className="aspect-[4/3] h-full min-h-[19rem] sm:min-h-[25rem] lg:aspect-auto lg:min-h-0"
+              />
+            </div>
           </div>
+          <HeroInfoStrip />
         </section>
 
-        <section id="about" className="bg-pearl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+        <section id="about" className="bg-linen px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden rounded-lg shadow-lift">
+              <div className="aspect-[4/5] overflow-hidden rounded-sm border border-olive/10 bg-cream">
                 <SmartImage
                   src="/images/restaurant-interior.png"
                   alt="Warm interior dining room at Luna Bistro"
                   className="h-full w-full"
                 />
               </div>
-              <div className="absolute -bottom-6 right-5 max-w-[15rem] rounded-lg bg-ink p-5 text-pearl shadow-lift sm:right-8">
-                <p className="font-display text-3xl">Cafe by day.</p>
-                <p className="mt-1 text-sm text-pearl/74">Supper club by night.</p>
+              <div className="absolute -bottom-6 right-4 max-w-[13rem] rounded-sm border border-olive/10 bg-linen p-4 text-olive shadow-soft sm:right-8 sm:max-w-[15rem] sm:p-5">
+                <p className="font-display text-2xl sm:text-3xl">Cafe by day.</p>
+                <p className="mt-1 text-sm text-smoke">Supper club by night.</p>
               </div>
             </div>
             <div>
@@ -229,11 +292,11 @@ export default function App() {
                 refined seasonal details, shaped by local produce, house-made pastries, and a dinner
                 service that feels intimate without being formal.
               </SectionHeading>
-              <div className="mt-9 grid gap-5 sm:grid-cols-3">
+              <div className="mt-9 grid gap-4 sm:grid-cols-3">
                 {['Seasonal plates', 'Small-batch coffee', 'Private dinners'].map((item) => (
-                  <div key={item} className="rounded-lg border border-ink/10 bg-white p-5 shadow-soft">
-                    <p className="text-sm font-bold text-ink">{item}</p>
-                    <p className="mt-3 h-1 w-12 bg-copper" aria-hidden="true" />
+                  <div key={item} className="rounded-sm border border-olive/10 bg-pearl p-5">
+                    <p className="text-sm font-semibold text-olive">{item}</p>
+                    <p className="mt-3 h-px w-12 bg-tan" aria-hidden="true" />
                   </div>
                 ))}
               </div>
@@ -241,7 +304,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="menu" className="bg-linen-texture px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <section id="menu" className="bg-cream px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <SectionHeading eyebrow="Featured Menu" title="Seasonal plates with cafe soul.">
@@ -250,33 +313,31 @@ export default function App() {
               </SectionHeading>
               <a
                 href="#reservation"
-                className="inline-flex items-center justify-center gap-3 rounded-md border border-ink px-5 py-3 text-sm font-bold text-ink transition hover:bg-ink hover:text-pearl"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-sm border border-olive/30 px-5 py-3 text-sm font-semibold text-olive transition hover:border-olive hover:bg-linen sm:w-auto"
               >
                 Reserve tonight
                 <ArrowRight size={17} aria-hidden="true" />
               </a>
             </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {featuredMenu.map((item, index) => (
-                <MenuCard key={item.name} item={item} index={index} />
+            <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-3">
+              {featuredMenu.map((item) => (
+                <MenuCard key={item.name} item={item} />
               ))}
             </div>
           </div>
         </section>
 
-        <section id="gallery" className="bg-ink px-4 py-20 text-pearl sm:px-6 lg:px-8 lg:py-28">
+        <section id="gallery" className="bg-pearl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-sm font-semibold text-gold">Gallery</p>
-              <h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">
-                Warm light, close tables, and dishes that photograph beautifully.
-              </h2>
-            </div>
-            <div className="mt-12 grid auto-rows-[16rem] gap-4 md:grid-cols-4">
+            <SectionHeading eyebrow="Gallery" title="Warm light, close tables, and dishes that photograph beautifully.">
+              A glimpse of the room, the coffee counter, and the plates that shape service from morning
+              through evening.
+            </SectionHeading>
+            <div className="mt-10 grid auto-rows-[13rem] gap-3 sm:mt-12 sm:auto-rows-[16rem] sm:gap-4 md:grid-cols-4">
               {galleryItems.map((item, index) => (
                 <figure
                   key={`${item.label}-${index}`}
-                  className={`group relative overflow-hidden rounded-lg border border-white/10 bg-pearl/8 ${
+                  className={`group relative overflow-hidden rounded-sm border border-olive/10 bg-cream ${
                     index === 0 || index === 1 ? 'md:col-span-2 md:row-span-2' : ''
                   }`}
                 >
@@ -284,9 +345,9 @@ export default function App() {
                     src={item.image}
                     alt={item.alt}
                     label={item.label}
-                    className="h-full w-full transition duration-500 group-hover:scale-105"
+                    className="h-full w-full transition duration-500 group-hover:scale-[1.03]"
                   />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/88 to-transparent p-5 text-sm font-semibold text-pearl">
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/65 to-transparent p-5 text-sm font-semibold text-pearl">
                     {item.label}
                   </figcaption>
                 </figure>
@@ -295,22 +356,22 @@ export default function App() {
           </div>
         </section>
 
-        <section id="hours" className="bg-pearl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <section id="hours" className="bg-linen px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <SectionHeading eyebrow="Opening Hours" title="Open for slow mornings and candlelit nights.">
               Luna Bistro shifts from espresso, pastry, and lunch into an intimate evening service on
               select nights each week.
             </SectionHeading>
-            <div className="rounded-lg border border-ink/10 bg-white p-6 shadow-soft sm:p-8">
-              <div className="mb-6 flex items-center gap-3 text-copper">
+            <div className="rounded-sm border border-olive/10 bg-pearl p-5 sm:p-8">
+              <div className="mb-6 flex items-center gap-3 text-olive">
                 <Clock3 size={22} aria-hidden="true" />
-                <p className="font-bold text-ink">Weekly Schedule</p>
+                <p className="font-semibold text-ink">Weekly Schedule</p>
               </div>
-              <div className="divide-y divide-ink/10">
+              <div className="divide-y divide-olive/10">
                 {openingHours.map((item) => (
-                  <div key={item.day} className="flex items-center justify-between gap-4 py-4">
+                  <div key={item.day} className="flex items-center justify-between gap-4 py-3.5 sm:py-4">
                     <p className="font-semibold text-ink">{item.day}</p>
-                    <p className="text-right text-sm text-ink/68">{item.hours}</p>
+                    <p className="text-right text-sm text-smoke">{item.hours}</p>
                   </div>
                 ))}
               </div>
@@ -318,24 +379,24 @@ export default function App() {
           </div>
         </section>
 
-        <section id="location" className="bg-shell px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2">
+        <section id="location" className="bg-cream px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+          <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
               <SectionHeading eyebrow="Location" title="Find us where the city slows down.">
                 Tucked into a calm corner of the old district, Luna Bistro is easy to reach for breakfast
                 meetings, weekend brunch, and intimate evening reservations.
               </SectionHeading>
-              <div className="mt-8 space-y-5 text-ink/72">
+              <div className="mt-8 space-y-5 text-smoke">
                 <p className="flex gap-3">
-                  <MapPin className="mt-1 shrink-0 text-copper" size={20} aria-hidden="true" />
+                  <MapPin className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
                   128 Crescent Lane, Old Town District, New York, NY 10012
                 </p>
                 <p className="flex gap-3">
-                  <Phone className="mt-1 shrink-0 text-copper" size={20} aria-hidden="true" />
+                  <Phone className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
                   (555) 014-7820
                 </p>
                 <p className="flex gap-3">
-                  <Mail className="mt-1 shrink-0 text-copper" size={20} aria-hidden="true" />
+                  <Mail className="mt-1 shrink-0 text-olive" size={20} aria-hidden="true" />
                   reservations@lunabistro.example
                 </p>
               </div>
@@ -344,21 +405,21 @@ export default function App() {
           </div>
         </section>
 
-        <section className="bg-pearl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <section className="bg-pearl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto max-w-7xl">
             <SectionHeading eyebrow="Guest Notes" title="A few kind words from regulars." align="center">
               Guests come for the coffee, linger for the seasonal plates, and return for the feeling of
               being known by name.
             </SectionHeading>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-3">
               {reviews.map((review) => (
-                <article key={review.name} className="rounded-lg border border-ink/10 bg-white p-7 shadow-soft">
-                  <div className="mb-5 flex gap-1 text-gold" aria-label="Five star review">
+                <article key={review.name} className="rounded-sm border border-olive/10 bg-linen p-6 sm:p-7">
+                  <div className="mb-5 flex gap-1 text-tan" aria-label="Five star review">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star key={index} size={17} fill="currentColor" aria-hidden="true" />
                     ))}
                   </div>
-                  <blockquote className="text-base leading-8 text-ink/76">"{review.quote}"</blockquote>
+                  <blockquote className="text-base leading-8 text-smoke">"{review.quote}"</blockquote>
                   <p className="mt-6 font-display text-2xl text-ink">{review.name}</p>
                 </article>
               ))}
@@ -366,72 +427,68 @@ export default function App() {
           </div>
         </section>
 
-        <section id="reservation" className="bg-ink px-4 py-20 text-pearl sm:px-6 lg:px-8 lg:py-28">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <section id="reservation" className="bg-linen px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
-              <p className="text-sm font-semibold text-gold">Reservations</p>
-              <h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl">
-                Save a table for coffee, dinner, or something in between.
-              </h2>
-              <p className="mt-5 text-base leading-8 text-pearl/72">
+              <SectionHeading eyebrow="Reservations" title="Save a table for coffee, dinner, or something in between.">
                 Share your preferred date, party size, and any special notes. Our host team will confirm
                 availability as soon as possible.
-              </p>
+              </SectionHeading>
             </div>
-            <div className="rounded-lg border border-white/10 bg-pearl p-6 text-ink shadow-lift sm:p-8">
+            <div className="rounded-sm border border-olive/10 bg-pearl p-4 shadow-soft sm:p-8">
               <ReservationForm />
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-[#101815] px-4 py-14 text-pearl sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
+      <footer className="border-t border-olive/10 bg-olive px-4 py-12 text-pearl sm:px-6 sm:py-14 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:gap-10">
           <div>
             <p className="font-display text-3xl">Luna Bistro</p>
-            <p className="mt-4 max-w-sm text-sm leading-7 text-pearl/65">
+            <p className="mt-4 max-w-sm text-sm leading-7 text-pearl/72">
               Specialty coffee, seasonal plates, and candlelit dinners in the heart of the old district.
             </p>
           </div>
           <div>
-            <p className="font-bold text-gold">Navigate</p>
+            <p className="font-semibold text-tan">Navigate</p>
             <div className="mt-4 grid gap-3 text-sm">
               {navLinks.slice(0, 5).map((link) => (
-                <a key={link.href} href={link.href} className="text-pearl/68 transition hover:text-gold">
+                <a key={link.href} href={link.href} className="text-pearl/72 transition hover:text-tan">
                   {link.label}
                 </a>
               ))}
             </div>
           </div>
           <div>
-            <p className="font-bold text-gold">Social</p>
+            <p className="font-semibold text-tan">Social</p>
             <div className="mt-4 flex gap-3">
               <a
                 href="#home"
                 aria-label="Instagram placeholder"
-                className="grid h-11 w-11 place-items-center rounded-md border border-white/12 text-pearl/74 transition hover:border-gold hover:text-gold"
+                className="grid h-11 w-11 place-items-center rounded-sm border border-pearl/15 text-pearl/74 transition hover:border-tan hover:text-tan"
               >
                 <Instagram size={19} aria-hidden="true" />
               </a>
               <a
                 href="#home"
                 aria-label="Facebook placeholder"
-                className="grid h-11 w-11 place-items-center rounded-md border border-white/12 text-pearl/74 transition hover:border-gold hover:text-gold"
+                className="grid h-11 w-11 place-items-center rounded-sm border border-pearl/15 text-pearl/74 transition hover:border-tan hover:text-tan"
               >
                 <Facebook size={19} aria-hidden="true" />
               </a>
             </div>
           </div>
           <div>
-            <p className="font-bold text-gold">Contact</p>
-            <div className="mt-4 space-y-3 text-sm text-pearl/68">
+            <p className="font-semibold text-tan">Contact</p>
+            <div className="mt-4 space-y-3 text-sm text-pearl/72">
               <p>128 Crescent Lane</p>
               <p>(555) 014-7820</p>
               <p>reservations@lunabistro.example</p>
             </div>
           </div>
         </div>
-        <div className="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6 text-sm text-pearl/50">
+        <div className="mx-auto mt-12 max-w-7xl border-t border-pearl/10 pt-6 text-sm text-pearl/55">
           Copyright 2026 Luna Bistro. All rights reserved.
         </div>
       </footer>

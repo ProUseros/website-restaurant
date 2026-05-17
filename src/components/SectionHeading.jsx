@@ -3,9 +3,10 @@ export default function SectionHeading({ eyebrow, title, children, align = 'left
 
   return (
     <div className={`max-w-3xl ${alignment}`}>
-      <p className="text-sm font-semibold text-copper">{eyebrow}</p>
-      <h2 className="mt-3 font-display text-4xl leading-tight text-ink sm:text-5xl">{title}</h2>
-      {children ? <p className="mt-5 text-base leading-8 text-ink/70 sm:text-lg">{children}</p> : null}
+      <p className="text-xs font-semibold uppercase tracking-[0.26em] text-olive/80">{eyebrow}</p>
+      <div className={`mt-4 h-px w-14 bg-tan ${align === 'center' ? 'mx-auto' : ''}`} aria-hidden="true" />
+      <h2 className="mt-5 font-display text-3xl leading-[1.08] text-ink sm:text-5xl">{title}</h2>
+      {children ? <p className="mt-4 text-base leading-7 text-smoke sm:mt-5 sm:text-lg sm:leading-8">{children}</p> : null}
     </div>
   )
 }
